@@ -1,7 +1,7 @@
 import sys
 import os.path
 import sqlite3
-import urllib2
+import urllib
 import zipfile
 from utillx import Utilx
 from ipinfo import IpInfo
@@ -29,15 +29,11 @@ class GeoIp(object):
     def download(self):
         self.printv("Download started...")
         self.printv("Url: {0}".format(self.data_source))
-        response = urllib2.urlopen(self.data_source)
-        zipcontent = response.read()
-        self.printv("Download completed")
 
-        self.printv("Writing file...")
-        self.printv("File name : {0}".format(self.data_file))
-        with open(self.data_file, 'w') as f:
-            f.write(zipcontent)
-        f.close()
+
+        urllib.urlretrieve(self.data_source, self.data_file)
+
+        self.printv("Download completed")
         self.printv("File write completed")
         return True
 

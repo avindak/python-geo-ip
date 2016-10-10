@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='geoip2nation',
-    version='0.1.1',
+    version='0.1.2',
     author='Avi Asher',
     author_email='aviasher@outlook.com',
     packages=['geoip'],
