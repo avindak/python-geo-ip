@@ -3,7 +3,6 @@ Geo IP
 ===========
 
 Provides a fast, seamless in memory ip to country functionality based on the ip2nation db.
-often looks like this::
 
 ```python
 from geoip import geoip
