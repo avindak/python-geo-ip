@@ -14,6 +14,12 @@ This prints : 'US'
 print r.resolve("123.44.57.4")
 This prints : {'country': 'Korea (South)', 'host_name': '', 'country_code': 'KR'}
 
+Installation
+=========
+
+pip install geoip2nation
+
+https://pypi.python.org/pypi/geoip2nation/
 
 ip2nation
 =========
