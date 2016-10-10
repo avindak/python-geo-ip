@@ -5,14 +5,16 @@ Geo IP
 Provides a fast, seamless in memory ip to country functionality based on the ip2nation db.
 often looks like this::
 
+```python
 from geoip import geoip
 r = geoip.GeoIp()
 r.load_memory()
 r.resolve("12.12.12.12").country_code
-This prints : 'US'
+#This prints : 'US'
 
 print r.resolve("123.44.57.4")
-This prints : {'country': 'Korea (South)', 'host_name': '', 'country_code': 'KR'}
+#This prints : {'country': 'Korea (South)', 'host_name': '', 'country_code': 'KR'}
+```
 
 Installation
 =========
