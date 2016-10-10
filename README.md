@@ -14,8 +14,8 @@ r.resolve("12.12.12.12").country_code
 print r.resolve("123.44.57.4")
 #This prints : {'country': 'Korea (South)', 'host_name': '', 'country_code': 'KR'}
 
-r.resolve2("12.12.12.12").country_code
-#This prints : 'US'
+r.resolve2("133.12.12.12")
+#This prints : 'JP'
 ```
 
 
