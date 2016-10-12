@@ -64,7 +64,7 @@ pip install geoip2nation
 
 PyPI: https://pypi.python.org/pypi/geoip2nation/
 
-Github : https://github.com/avindak/python-geo-ip
+Github: https://github.com/avindak/python-geo-ip
 
 ip2nation
 =========
@@ -80,4 +80,5 @@ MIT
 Links
 ========
 
-ip2nation home http://ip2nation.com/
+* ip2nation home: http://ip2nation.com/
+* ip2nation data file: http://www.ip2nation.com/ip2nation.zip
