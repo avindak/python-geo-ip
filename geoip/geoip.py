@@ -3,8 +3,8 @@ import os.path
 import sqlite3
 import urllib
 import zipfile
-from utillx import Utilx
-from ipinfo import IpInfo
+from .utillx import Utilx
+from .ipinfo import IpInfo
 import argparse
 
 class GeoIp(object):
@@ -25,7 +25,7 @@ class GeoIp(object):
 
     def printv(self,s):
         if self.verbose:
-            print s
+            print(s)
 
     def download(self):
         self.printv("Download started...")
@@ -42,13 +42,13 @@ class GeoIp(object):
         self.loaded = False
         self.printv("Load memory started...")
         if not os.path.exists(self.data_file):
-            print "WARNING: The data file does not exists. Call download() to Download it."
+            print("WARNING: The data file does not exists. Call download() to Download it.")
             return
 
         try:
             z = zipfile.ZipFile(self.data_file)
-        except zipfile.error, e:
-            print "Bad zipfile (from %r): %s" % (self.data_file, e)
+        except zipfile.error as e:
+            print("Bad zipfile (from %r): %s" % (self.data_file, e))
             self.loaded = False
             return
 

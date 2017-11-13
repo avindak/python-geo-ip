@@ -19,7 +19,7 @@ class Utilx(object):
             inet = long(tokens[0]) * 16777216 + long(tokens[1]) * 65536 + long(tokens[2]) * 256 + long(tokens[3])
             return inet
         except:
-            print "Error in ip2inet for ip: {0}".format(original_ip)
+            print("Error in ip2inet for ip: {0}".format(original_ip))
             return 0
 
     @staticmethod
