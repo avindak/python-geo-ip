@@ -11,7 +11,8 @@ class GeoIp(object):
 
     def __init__(self, data_source='http://www.ip2nation.com/ip2nation.zip', data_file=None, verbose=False):
         self.verbose = verbose
-        self.conn = sqlite3.connect(':memory:')
+        self.sqlfile = os.path.join(os.path.dirname(__file__), 'data.sqlite3')
+        self.conn = sqlite3.connect(self.sqlfile)
         self.conn.text_factory = str
         #self.data_file = data_file
         if data_file is None:
@@ -103,13 +104,13 @@ class GeoIp(object):
 
 
     def resolve(self, ip_str, auto_load=True, resolve_host_name=False):
-        if not self.loaded:
-            if auto_load:
-                self.load_memory()
-            else:
-                print "WARNING : Ip data should be loaded before calling resolve"
-            if not self.loaded:
-                return None
+        # if not self.loaded:
+        #     if auto_load:
+        #         self.load_memory()
+        #     else:
+        #         print "WARNING : Ip data should be loaded before calling resolve"
+        #     if not self.loaded:
+        #         return None
         ip = Utilx.ip2inet(ip_str)
         query = """
          SELECT c.iso_code_2, c.country FROM
@@ -124,7 +125,7 @@ class GeoIp(object):
 	        LIMIT 0,1;""".format(ip)
 
         c = self.conn.cursor()
-        c.execute(query);
+        c.execute(query)
         res = c.fetchone()
 
         country_code = "" if res is None or len(res) == 0 else res[0]
@@ -146,7 +147,7 @@ def download(args):
 def resolve(args):
     ipr = GeoIp()
     ipr.verbose = args.verbose
-    ipr.load_memory()
+    # ipr.load_memory()
     if args.stream:
         for line in sys.stdin:
             ip = line.strip()
