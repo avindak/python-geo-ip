@@ -2,7 +2,10 @@
 Geo IP
 ===========
 
+Note: This is a friendly Python 3 port of [python-geo-ip](https://github.com/avindak/python-geo-ip) by Avi Asher. We look forward to the original package supporting Python 3.
+
 Provides a fast, seamless in memory ip to country functionality based on the ip2nation db.
+
 - No dependencies
 - Completely free
 - Country resolution only
@@ -26,39 +29,35 @@ r.resolve2("133.12.12.12")
 #This prints : 'JP'
 ```
 
-Command line
-=========
+# Command line
 
-usage: geoip.py [-h] [-v] {download,resolve} ...
-
-positional arguments:
-  {download,resolve}
-
-optional arguments:
-  -h, --help          show this help message and exit
-  -v, --verbose       increase output verbosity
-
-
-usage: geoip.py resolve [-h] [-ho] [-s] [--stream] ip
+usage: geoip.py [-h][-v] {download,resolve} ...
 
 positional arguments:
-  ip           The ip address to get the country for
+{download,resolve}
 
 optional arguments:
-  -h, --help   show this help message and exit
-  -ho, --host  When set to true the code will try to get the host name
-  -s, --short  When set to true the code will return a 2 letter country code
-               only
-  --stream     When set to true the code expect a stream of ips
+-h, --help show this help message and exit
+-v, --verbose increase output verbosity
+
+usage: geoip.py resolve [-h][-ho] [-s][--stream] ip
+
+positional arguments:
+ip The ip address to get the country for
+
+optional arguments:
+-h, --help show this help message and exit
+-ho, --host When set to true the code will try to get the host name
+-s, --short When set to true the code will return a 2 letter country code
+only
+--stream When set to true the code expect a stream of ips
 
 usage: geoip.py download [-h]
 
 optional arguments:
-  -h, --help  show this help message and exit
+-h, --help show this help message and exit
 
-
-Installation
-=========
+# Installation
 
 pip install geoip2nation
 
@@ -66,19 +65,17 @@ PyPI: https://pypi.python.org/pypi/geoip2nation/
 
 Github: https://github.com/avindak/python-geo-ip
 
-ip2nation
-=========
+# ip2nation
 
-* Data can be downloaded using the download method
+- Data can be downloaded using the download method
 
-* The load_memory method loads the ip2nation sql data file from disk into an in memory sqlite3 db
+- The load_memory method loads the ip2nation sql data file from disk into an in memory sqlite3 db
 
-license
-========
+# license
+
 MIT
 
-Links
-========
+# Links
 
-* ip2nation home: http://ip2nation.com/
-* ip2nation data file: http://www.ip2nation.com/ip2nation.zip
+- ip2nation home: http://ip2nation.com/
+- ip2nation data file: http://www.ip2nation.com/ip2nation.zip
