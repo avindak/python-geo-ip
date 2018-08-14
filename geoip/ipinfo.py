@@ -1,4 +1,6 @@
+
 class IpInfo(object):
+
     def __init__(self, country_code, country, host_name):
         self.country_code = country_code
         self.country = country
