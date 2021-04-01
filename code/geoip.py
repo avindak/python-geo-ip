@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os.path
 import sqlite3
@@ -6,6 +7,18 @@ import zipfile
 from utillx import Utilx
 from ipinfo import IpInfo
 import argparse
+
+isPy3 = True
+if sys.version_info[0] < 3:
+    isPy3 = False
+
+if sys.version_info[0] >= 3:
+    from urllib.request import urlretrieve
+else:
+    # Not Python 3 - today, it is most likely to be Python 2
+    # But note that this might need an update when Python 4
+    # might be around one day
+    from urllib import urlretrieve
 
 class GeoIp(object):
 
@@ -24,15 +37,12 @@ class GeoIp(object):
 
     def printv(self,s):
         if self.verbose:
-            print s
+            print(s)
 
     def download(self):
         self.printv("Download started...")
         self.printv("Url: {0}".format(self.data_source))
-
-
-        urllib.urlretrieve(self.data_source, self.data_file)
-
+        urlretrieve(self.data_source, self.data_file)
         self.printv("Download completed")
         self.printv("File write completed")
         return True
@@ -41,20 +51,24 @@ class GeoIp(object):
         self.loaded = False
         self.printv("Load memory started...")
         if not os.path.exists(self.data_file):
-            print "WARNING: The data file does not exists. Call download() to Download it."
+            print( "WARNING: The data file does not exists. Call download() to Download it.")
             return
 
         try:
             z = zipfile.ZipFile(self.data_file)
-        except zipfile.error, e:
-            print "Bad zipfile (from %r): %s" % (self.data_file, e)
+        except e:
+            print( "Bad zipfile {0}".format(self.data_file))
             self.loaded = False
             return
 
         for n in z.namelist():
             self.printv("File found in Zip : {0}".format(n))
             data = z.read(n)
-            data = data.replace("ip int(11) unsigned NOT NULL default '0',", "\"ip\" integer ,")
+            if isPy3:
+                data = data.decode("utf-8").replace("ip int(11) unsigned NOT NULL default '0',", "\"ip\" integer ,")
+            else:
+                data = data.replace("ip int(11) unsigned NOT NULL default '0',", "\"ip\" integer ,")
+
             c = self.conn.cursor()
             c.executescript("""
                         DROP TABLE IF EXISTS ip2nation;
@@ -85,8 +99,7 @@ class GeoIp(object):
             counter = 0
             for raw_line in data.split("\n"):
                 if raw_line.startswith("INSERT"):
-                    line = raw_line.replace("\\'", "")
-                    #print line
+                    line = raw_line.replace("\\'", "")                   
                     c.executescript(line)
                     counter += 1
 
@@ -107,7 +120,7 @@ class GeoIp(object):
             if auto_load:
                 self.load_memory()
             else:
-                print "WARNING : Ip data should be loaded before calling resolve"
+                print("WARNING : Ip data should be loaded before calling resolve")
             if not self.loaded:
                 return None
         ip = Utilx.ip2inet(ip_str)
