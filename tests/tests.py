@@ -2,7 +2,7 @@ from __future__ import print_function
 import unittest
 import sys
 sys.path.append('../geoip')
-from geoip import GeoIp
+from xgeoip import GeoIp
 
 class TestGeoIpMethods(unittest.TestCase):
 

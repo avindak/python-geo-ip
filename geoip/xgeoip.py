@@ -1,24 +1,29 @@
 from __future__ import print_function
 import sys
+import os
 import os.path
 import sqlite3
 import urllib
 import zipfile
-from utillx import Utilx
-from ipinfo import IpInfo
 import argparse
 
 isPy3 = True
 if sys.version_info[0] < 3:
     isPy3 = False
 
-if sys.version_info[0] >= 3:
+if isPy3:
     from urllib.request import urlretrieve
+    try:
+        from .utillx import *
+        from .ipinfo import *
+    except:
+        from utillx import Utilx
+        from ipinfo import IpInfo    
 else:
-    # Not Python 3 - today, it is most likely to be Python 2
-    # But note that this might need an update when Python 4
-    # might be around one day
     from urllib import urlretrieve
+    from utillx import Utilx
+    from ipinfo import IpInfo
+
 
 class GeoIp(object):
 
@@ -111,8 +116,8 @@ class GeoIp(object):
         self.loaded = True
 
     def resolve2(self, ip_str):
-        ipinfo = self.resolve(ip_str)
-        return None if ipinfo is None else ipinfo.country_code
+        ipinfox = self.resolve(ip_str)
+        return None if ipinfox is None else ipinfox.country_code
 
 
     def resolve(self, ip_str, auto_load=True, resolve_host_name=False):
@@ -169,9 +174,9 @@ def resolve(args):
     else:
         res = ipr.resolve(args.ip)
         if args.short:
-            sys.stdout.writelines(res.country_code)
+            sys.stdout.write(str(res.country_code))
         else:
-            sys.stdout.writelines(res)
+            sys.stdout.write(str(res))
 
 
 

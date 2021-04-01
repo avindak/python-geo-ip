@@ -12,14 +12,21 @@ Provides a fast, seamless in memory ip to country functionality based on the ip2
 - Command line
 - Stream / pipe ips and get comma delimited [ip,2 letter country code] e.g. 12.12.12.12,US
 
+
+Change log:
+- If you upgrade please note that there is a BREAKING CHANGE geoip module was renamed to xgeoip
+- Supports Python 2.7 / 3.x
+- ip2nation file updated to May 2020 version
+
 ```python
-from geoip import geoip
-r = geoip.GeoIp()
+#Python 2.7 / Python 3.x
+from geoip import xgeoip
+r = xgeoip.GeoIp()
 r.load_memory()
 r.resolve("12.12.12.12").country_code
 #This prints : 'US'
 
-print( r.resolve("123.44.57.4"))
+print (r.resolve("123.44.57.4"))
 #This prints : {'country': 'Korea (South)', 'host_name': '', 'country_code': 'KR'}
 
 r.resolve2("133.12.12.12")
@@ -28,8 +35,10 @@ r.resolve2("133.12.12.12")
 
 Command line
 =========
+package usage: python geoip/xgeoip.py resolve 1.1.1.1
+{'country_code': 'AU', 'country': 'Australia', 'host_name': ''}
 
-usage: geoip.py [-h] [-v] {download,resolve} ...
+source usage: python xgeoip.py [-h] [-v] {download,resolve} ...
 
 positional arguments:
   {download,resolve}
