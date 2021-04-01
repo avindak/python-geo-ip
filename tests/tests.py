@@ -1,8 +1,7 @@
 from __future__ import print_function
 import unittest
 import sys
-sys.path.append('../code')
-sys.path.append('../code/')
+sys.path.append('../geoip')
 from geoip import GeoIp
 
 class TestGeoIpMethods(unittest.TestCase):
