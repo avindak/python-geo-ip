@@ -197,8 +197,5 @@ def main():
     args.func(args)  # call the default function
 
 
-
-
 if __name__ == "__main__":
     main()
-    #test()
